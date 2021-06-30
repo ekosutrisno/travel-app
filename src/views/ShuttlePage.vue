@@ -60,8 +60,8 @@
  <section class="grid h-full border-b md:grid-cols-2 px-4 sm:px-6 lg:px-16">
    <div class="border-b md:border-r md:border-b-0 p-4 px-8 grid md:grid-cols-2 gap-4">
      <ShuttleCard 
-        v-for="(shuttle, idx) in filteredShuttle" 
-        :key="idx"
+        v-for="shuttle in filteredShuttle" 
+        :key="shuttle.shuttleId"
         :shuttle="shuttle"
         @click="setSelectedShuttle(shuttle, true)"
         :checked="shuttle.shuttleId == shuttleAsal.shuttleId"
@@ -69,8 +69,8 @@
    </div>
    <div class="p-4 px-8 grid md:grid-cols-2 gap-4">
      <ShuttleCard 
-        v-for="(shuttle, idx) in filteredShuttle" 
-        :key="idx"
+        v-for="shuttle in filteredShuttle" 
+        :key="shuttle.shuttleId"
         :shuttle="shuttle"
         @click="setSelectedShuttle(shuttle, false)"
         :checked="shuttle.shuttleId == shuttleTujuan.shuttleId"
