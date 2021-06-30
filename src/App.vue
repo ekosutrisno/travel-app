@@ -1,15 +1,25 @@
 <template>
-  <div class="bg-gradient-to-b from-base to-indigo-200 h-screen font-quicksand">
+  <div class="bg-white min-h-screen font-quicksand">
     <router-view></router-view>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "App",
   components: {},
+  setup() {
+    const store = useStore();
+    onMounted(async () => {
+      await store.dispatch("shuttleModule/setShuttleData");
+      await store.dispatch("userModule/setUserData");
+    });
+
+    return {};
+  },
 });
 </script>
 <style>
