@@ -45,7 +45,7 @@
         </div>
      </div>
    </div>
-   <div class="flex items-end justify-center mt-2">
+   <div class="flex flex-col items-center md:flex-row md:items-end justify-center mt-2">
       <div class="inline-block items-center  space-y-1 text-white">
           <p class="text-xs text-center">Jam Keberangkatan</p>
           <div @click="setSelectedJam(jamKbr)" v-for="jamKbr in jamKeberangkatan" :key="jamKbr.jamKeberangkatanId" class="p-2.5 mx-2 relative shadow-sm font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
@@ -60,7 +60,7 @@
             </svg>
           </div>
       </div>
-      <router-link :to="{path:`/u/checkout/${user.userId}`}" class="p-2.5 ml-10 shadow-sm hover:shadow-xl font-semibold bg-purple-50 rounded-md text-basePurple">Checkout</router-link>
+      <router-link :to="{path:`/u/checkout/${user.userId}`}" class="p-2.5 mt-2 md:mt-0 md:ml-10 shadow-sm hover:shadow-xl font-semibold bg-purple-50 rounded-md text-basePurple">Checkout</router-link>
    </div>
  </header>
  
@@ -69,7 +69,7 @@
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
     </svg>
-    <input type="text" v-model="filterQuery" class="w-full text-lg focus:outline-none appearance-none py-3 px-4 placeholder-gray-600 focus:placeholder-gray-400" placeholder="Search all shuttle">
+    <input type="search" v-model="filterQuery" class="w-full rounded border-0 focus:border-transparent focus:ring-transparent text-lg py-3 px-4 placeholder-gray-600 focus:placeholder-gray-400" placeholder="Search all shuttle">
  </section>
  
  <!-- Shuttle -->

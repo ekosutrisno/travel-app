@@ -19,11 +19,18 @@ const transactionModule: Module<StoreTransaction, State> = {
       SET_TRANSACTIONS: (state: StoreTransaction, transactions: Transaction[]) => state.transactions = transactions
    },
    actions: {
-      setTransaction({ commit }, userId: number) {
+      setTransaction({ commit }, userId: number): void {
          apiService.get(`/transaction/${userId}/transactions`)
             .then((res: AxiosResponse<Transaction[]>) => {
                commit('SET_TRANSACTIONS', res.data);
-            })
+            });
+      },
+      async checkoutAction({ dispatch }, payload: any): Promise<void> {
+         console.log(payload);
+         await apiService.post(`/transaction`, payload)
+            .then(() => {
+               dispatch('setTransaction', payload.userId);
+            });
       }
    }
 }

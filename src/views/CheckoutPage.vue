@@ -45,29 +45,31 @@
                <h2 class="flex-none text-lg leading-6 font-medium text-gray-800 mr-3">Payment Details (Test)</h2>
                <p class="hidden sm:block flex-none w-full text-sm leading-5 mt-1">Complete your purchase by providing your payment details.</p>
             </header>
-            <div class="col-span-6 sm:col-span-3">
-               <label for="nama_penumpang" class="block text-sm font-medium text-gray-700">Nama penumpang</label>
-               <input type="text" name="nama_penumpang" :value="user.nama" id="nama_penumpang" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-            </div>
-            <div class="col-span-6 sm:col-span-3">
-               <label for="tanggal_berangkat"  class="block text-sm font-medium text-gray-700">Tanggal berangkat</label>
-               <input type="date" name="tanggal_berangkat" v-model="tanggalKeberangkatan" id="tanggal_berangkat" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
-            </div>
-            <div class="grid grid-cols-2 gap-2 mt-4">
-               <div>
-                  <label for="no_telepone" class="block text-sm font-medium text-gray-700">No Telephone</label>
-                  <input type="text" name="no_telepone" v-model="nomorTelephone" id="no_telepone" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+            <form @submit.prevent="bayarAction">
+               <div class="col-span-6 sm:col-span-3">
+                  <label for="nama_penumpang" class="block text-sm font-medium text-gray-700">Nama penumpang</label>
+                  <input type="text" name="nama_penumpang" :value="user.nama" id="nama_penumpang" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                </div>
-               <div>
-                  <label for="no_kursi" class="block text-sm font-medium text-gray-700">Nomor Kursi</label>
-                  <input type="number" name="no_kursi" min="0" v-model.number="nomorKursi" id="no_kursi" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+               <div class="col-span-6 sm:col-span-3">
+                  <label for="tanggal_berangkat"  class="block text-sm font-medium text-gray-700">Tanggal berangkat</label>
+                  <input type="date" required name="tanggal_berangkat" v-model="tanggalKeberangkatan" id="tanggal_berangkat" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                </div>
-            </div>
-            <div class="mt-4">
-               <button type="button" @click="bayarAction" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-basePurple hover:bg-base100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                  Bayar Rp35000
-               </button>
-            </div>
+               <div class="grid grid-cols-2 gap-2 mt-4">
+                  <div>
+                     <label for="no_telepone" class="block text-sm font-medium text-gray-700">No Telephone</label>
+                     <input type="text" required name="no_telepone" v-model="nomorTelephone" id="no_telepone" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                  </div>
+                  <div>
+                     <label for="no_kursi" class="block text-sm font-medium text-gray-700">Nomor Kursi</label>
+                     <input type="number" required name="no_kursi" min="0" v-model.number="nomorKursi" id="no_kursi" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                  </div>
+               </div>
+               <div class="mt-4">
+                  <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-basePurple hover:bg-base100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                     Bayar Rp35000
+                  </button>
+               </div>
+            </form>
          </div>
       </div>
    </div>
@@ -75,7 +77,7 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, reactive, toRefs } from 'vue'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex'
 import BgWorld from '../components/svg/BgWorld.vue';
 
@@ -84,6 +86,7 @@ export default defineComponent({
    setup () {
       const store = useStore();
       const route = useRoute();
+      const router = useRouter();
 
       const state = reactive({
          transactions: computed(()=> store.state.transactionModule.transactions),
@@ -101,8 +104,7 @@ export default defineComponent({
       })
 
       const converTanggal = (tanggal: any) =>{
-         var tgl = '01/07/2021';
-         var tglReplace = tgl.replace('/','');
+         var tglReplace = tanggal.replaceAll('-','');
          return parseInt(tglReplace);
       }
 
@@ -119,7 +121,10 @@ export default defineComponent({
             userId: state.user.userId
          }
 
-         console.log(dataTransaction);
+         store.dispatch('transactionModule/checkoutAction', dataTransaction)
+         .then(()=>{
+            router.push('/u/shuttle')
+         })
       }
 
       return {

@@ -1,5 +1,5 @@
 <template>
-  <div class="max-w-screen h-full mx-auto flex flex-col items-center justify-center space-y-40 lg:space-y-10 p-6 relative">
+  <div class="max-w-screen h-full min-h-screen mx-auto flex flex-col items-center justify-center space-y-40 lg:space-y-10 p-6 relative">
      <img class="w-full h-full object-cover inset-0 absolute z-0 opacity-60" src="https://images.unsplash.com/photo-1500835556837-99ac94a94552?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTR8fHRyYXZlbHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="bg-cs">
       <div class="z-10 lg:text-center">
          <p class="text-white text-3xl font-semibold">This is no longer <br class="lg:hidden"> the era for slow <br class="lg:hidden"> Travel</p>
