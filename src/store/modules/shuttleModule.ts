@@ -1,13 +1,15 @@
 import { AxiosResponse } from "axios";
 import { Module } from "vuex";
 import { State } from "..";
-import { Shutlle } from '../../@types/interface';
+import { JamKeberangkatan, Shutlle } from '../../@types/interface';
 import apiService from '../../config/axiosConfig';
 
 interface StoreShuttle {
    shuttles: Shutlle[],
    shuttleAsal?: Shutlle,
    shuttleTujuan?: Shutlle,
+   jamKeberangkatan?: JamKeberangkatan[],
+   jam: JamKeberangkatan
 }
 
 const shuttleModule: Module<StoreShuttle, State> = {
@@ -31,21 +33,40 @@ const shuttleModule: Module<StoreShuttle, State> = {
             },
          },
          shuttles: [],
+         jamKeberangkatan: [],
+         jam: {
+            jamKeberangkatanId: 1,
+            jam: "07:00"
+         }
       }
    },
    mutations: {
       SET_SHUTTLES: (state: StoreShuttle, shuttles: Shutlle[]) => state.shuttles = shuttles,
+      SET_JAM_KEBERANGKATAN: (state: StoreShuttle, jamKeberangkatan: JamKeberangkatan[]) => state.jamKeberangkatan = jamKeberangkatan,
       SET_SHUTTLE_ASAL: (state: StoreShuttle, shutlle: Shutlle) => state.shuttleAsal = shutlle,
       SET_SHUTTLE_TUJUAN: (state: StoreShuttle, shutlle: Shutlle) => state.shuttleTujuan = shutlle,
+      SET_JAM: (state: StoreShuttle, jam: JamKeberangkatan) => state.jam = jam,
    },
    actions: {
-      setShuttleData({ commit, state }) {
-         if (state.shuttles.length == 0)
-            apiService.get(`/shuttle`)
-               .then((res: AxiosResponse<Shutlle[]>) => {
-                  commit('SET_SHUTTLES', res.data);
-               })
-               .catch(error => console.log(error));
+      setShuttleData({ commit, dispatch }) {
+
+         apiService.get(`/shuttle`)
+            .then((res: AxiosResponse<Shutlle[]>) => {
+               commit('SET_SHUTTLES', res.data);
+               dispatch('setJamKeberangkatan')
+            })
+            .catch(error => console.log(error));
+      },
+
+      setJamKeberangkatan({ commit }) {
+         apiService.get(`/jamkeberangkatan`)
+            .then((res: AxiosResponse<JamKeberangkatan[]>) => {
+               commit('SET_JAM_KEBERANGKATAN', res.data);
+            })
+      },
+
+      setJam({ commit }, jam: JamKeberangkatan) {
+         commit('SET_JAM', jam);
       },
 
       setShuttleAsal({ commit }, shuttle: Shutlle) {

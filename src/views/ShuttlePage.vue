@@ -45,8 +45,22 @@
         </div>
      </div>
    </div>
-   <div class="flex items-center justify-center mt-5">
-     <router-link :to="{path:`/u/checkout/${user.userId}`}" class="py-2 px-5 bg-purple-50 rounded-md">Checkout</router-link>
+   <div class="flex items-end justify-center mt-2">
+      <div class="inline-block items-center  space-y-1 text-white">
+          <p class="text-xs text-center">Jam Keberangkatan</p>
+          <div @click="setSelectedJam(jamKbr)" v-for="jamKbr in jamKeberangkatan" :key="jamKbr.jamKeberangkatanId" class="p-2.5 mx-2 relative shadow-sm font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
+            <span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </span>
+            <span>  {{jamKbr ? jamKbr.jam : '00:00'}} </span>
+            <svg v-if="jamKbr.jamKeberangkatanId == jam.jamKeberangkatanId" xmlns="http://www.w3.org/2000/svg" area-hidden="true" class="absolute -top-2 -right-2 h-5 w-5 text-white" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+          </div>
+      </div>
+      <router-link :to="{path:`/u/checkout/${user.userId}`}" class="p-2.5 ml-10 shadow-sm hover:shadow-xl font-semibold bg-purple-50 rounded-md text-basePurple">Checkout</router-link>
    </div>
  </header>
  
@@ -111,7 +125,7 @@
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
-import { Shutlle } from "../@types/interface";
+import { JamKeberangkatan, Shutlle } from "../@types/interface";
 import ShuttleCard from "../components/ShuttleCard.vue";
 
 export default defineComponent({
@@ -121,6 +135,8 @@ export default defineComponent({
     const state = reactive({
       filterQuery: '',
       shuttles: computed(()=> store.state.shuttleModule.shuttles),
+      jamKeberangkatan: computed(()=> store.state.shuttleModule.jamKeberangkatan),
+      jam: computed(()=> store.state.shuttleModule.jam),
       shuttleAsal: computed(()=> store.state.shuttleModule.shuttleAsal),
       shuttleTujuan: computed(()=> store.state.shuttleModule.shuttleTujuan),
       user: computed(()=>store.state.userModule.user)
@@ -145,10 +161,15 @@ export default defineComponent({
         store.dispatch('shuttleModule/setShuttleTujuan', shutlle);
     }
 
+    const setSelectedJam = (jam: JamKeberangkatan) => {
+        store.dispatch('shuttleModule/setJam', jam);
+    }
+
     return {
       ...toRefs(state),
       filteredShuttle,
-      setSelectedShuttle
+      setSelectedShuttle,
+      setSelectedJam
     };
   },
 });
