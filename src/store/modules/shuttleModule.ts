@@ -39,12 +39,13 @@ const shuttleModule: Module<StoreShuttle, State> = {
       SET_SHUTTLE_TUJUAN: (state: StoreShuttle, shutlle: Shutlle) => state.shuttleTujuan = shutlle,
    },
    actions: {
-      setShuttleData({ commit }) {
-         apiService.get(`/shuttle`)
-            .then((res: AxiosResponse<Shutlle[]>) => {
-               commit('SET_SHUTTLES', res.data);
-            })
-            .catch(error => console.log(error));
+      setShuttleData({ commit, state }) {
+         if (state.shuttles.length == 0)
+            apiService.get(`/shuttle`)
+               .then((res: AxiosResponse<Shutlle[]>) => {
+                  commit('SET_SHUTTLES', res.data);
+               })
+               .catch(error => console.log(error));
       },
 
       setShuttleAsal({ commit }, shuttle: Shutlle) {

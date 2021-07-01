@@ -16,15 +16,15 @@
    </div>
    <div class="flex space-x-3 lg:space-x-10 items-center justify-center p-4 text-white">
      <div class="inline-block items-center space-y-1">
-        <p class="text-sm">Kota Asal</p>
-        <div class="p-2 shadow-sm rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
+        <p class="text-xs">Kota Asal</p>
+        <div class="p-2.5 shadow-sm hover:shadow-xl transition duration-100 font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
           </span>
-          <span> {{shuttleAsal.namaShuttle}} </span>
+          <span> {{shuttleAsal ? shuttleAsal.namaShuttle : 'Pilih Shuttle Asal'}} </span>
         </div>
      </div>
      <span class="-mb-5">
@@ -33,53 +33,67 @@
       </svg>
      </span>
       <div class="inline-block items-center space-y-1">
-        <p class="text-sm">Kota Tujuan</p>
-        <div class="p-2 shadow-sm rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
+        <p class="text-xs">Kota Tujuan</p>
+        <div class="p-2.5 shadow-sm hover:shadow-xl transition duration-100 font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
           <span>
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
           </span>
-          <span>  {{shuttleTujuan.namaShuttle}} </span>
+          <span>  {{shuttleTujuan ? shuttleTujuan.namaShuttle : 'Pilih Shuttle Tujuan'}} </span>
         </div>
      </div>
    </div>
    <div class="flex items-center justify-center mt-5">
-     <button class="py-2 px-5 bg-purple-50 rounded-md">
-      Checkout</button>
+     <router-link :to="{path:`/u/checkout/${user.userId}`}" class="py-2 px-5 bg-purple-50 rounded-md">Checkout</router-link>
    </div>
  </header>
- <section class="h-20 border-b shadow-sm flex items-center bg-white px-4 sm:px-6 lg:px-16 sticky top-0">
+ 
+ <!-- Search -->
+ <section class="h-20 border-b shadow-sm flex items-center bg-white px-4 sm:px-6 lg:px-16 sticky top-0 z-20">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
     </svg>
     <input type="text" v-model="filterQuery" class="w-full text-lg focus:outline-none appearance-none py-3 px-4 placeholder-gray-600 focus:placeholder-gray-400" placeholder="Search all shuttle">
  </section>
+ 
  <!-- Shuttle -->
  <section class="grid h-full border-b md:grid-cols-2 px-4 sm:px-6 lg:px-16">
-   <div class="border-b md:border-r md:border-b-0 p-4 px-8 grid md:grid-cols-2 gap-4">
-     <ShuttleCard 
-        v-for="shuttle in filteredShuttle" 
-        :key="shuttle.shuttleId"
-        :shuttle="shuttle"
-        @click="setSelectedShuttle(shuttle, true)"
-        :checked="shuttle.shuttleId == shuttleAsal.shuttleId"
-      />
+   <div class="border-b md:border-r md:border-b-0 p-4 px-8">
+     <header class="col-start-1 my-3 row-start-1 flex flex-wrap items-baseline">
+       <h2 class="flex-none text-lg leading-6 font-medium text-gray-900 mr-3">Asal</h2>
+       <p class="hidden sm:block flex-auto text-gray-400 text-sm leading-5 font-medium">Semua Pilihan Shuttle Asal</p><p class="hidden sm:block flex-none w-full text-sm leading-5 mt-3">Merupakan pilihan semua terminal asal keberangkatan dan diharapkan Anda memilih dengan teliti.</p>
+     </header>
+    <div class="grid md:grid-cols-2 gap-4 py-3">
+      <ShuttleCard 
+          v-for="shuttle in filteredShuttle" 
+          :key="shuttle.shuttleId"
+          :shuttle="shuttle"
+          @click="setSelectedShuttle(shuttle, true)"
+          :checked="shuttle.shuttleId == shuttleAsal.shuttleId"
+        />
+    </div>
    </div>
-   <div class="p-4 px-8 grid md:grid-cols-2 gap-4">
-     <ShuttleCard 
-        v-for="shuttle in filteredShuttle" 
-        :key="shuttle.shuttleId"
-        :shuttle="shuttle"
-        @click="setSelectedShuttle(shuttle, false)"
-        :checked="shuttle.shuttleId == shuttleTujuan.shuttleId"
-      />
+   <div class="p-4 px-8">
+     <header class="col-start-1 my-3 row-start-1 flex flex-wrap items-baseline">
+       <h2 class="flex-none text-lg leading-6 font-medium text-gray-900 mr-3">Tujuan</h2>
+       <p class="hidden sm:block flex-auto text-gray-400 text-sm leading-5 font-medium">Semua Pilihan Shuttle Tujuan</p><p class="hidden sm:block flex-none w-full text-sm leading-5 mt-3">Merupakan pilihan semua terminal tujuan keberangkatan dan diharapkan Anda memilih dengan teliti.</p>
+     </header>
+    <div class="grid md:grid-cols-2 gap-4 py-3">
+      <ShuttleCard 
+          v-for="shuttle in filteredShuttle" 
+          :key="shuttle.shuttleId"
+          :shuttle="shuttle"
+          @click="setSelectedShuttle(shuttle, false)"
+          :checked="shuttle.shuttleId == shuttleTujuan.shuttleId"
+        />
+    </div>
    </div>
  </section>
 
  <!-- Footer -->
- <footer class="flex items-center justify-between py-5 bg-gray-50 px-4 sm:px-6 lg:px-16">
+ <footer class="flex flex-col md:flex-row items-center justify-between py-5 bg-gray-50 px-4 sm:px-6 lg:px-16">
    <div class="inline-flex items-center space-x-3 text-sm">
       <div class="inline-flex items-center space-x-2">
         <img class="h-8 w-8 rounded-full border" src="https://avatars.githubusercontent.com/u/77217289?s=64&v=4" alt="safrizal">
@@ -90,7 +104,7 @@
         <p>Frontend by <a class="text-indigo-400 hover:text-opacity-70 font-semibold" href="https://github.com/ekosutrisno" target="_blank">@EkoSutrisno</a></p>
       </div>
    </div>
-   <div class="text-indigo-400 font-semibold text-xs">&copy; ExoApp Corporation {{new Date().getFullYear()}}</div>
+   <div class="text-indigo-400 font-semibold text-xs">&copy; ExoApp Corporation {{new Date().getFullYear()}} v0.0.1</div>
  </footer>
 </template>
 
@@ -109,14 +123,17 @@ export default defineComponent({
       shuttles: computed(()=> store.state.shuttleModule.shuttles),
       shuttleAsal: computed(()=> store.state.shuttleModule.shuttleAsal),
       shuttleTujuan: computed(()=> store.state.shuttleModule.shuttleTujuan),
-      user: computed(()=>store.state.userModule.users[0]) || {nama: 'Safrizal'}
+      user: computed(()=>store.state.userModule.user)
     });
 
     const filteredShuttle = computed(() => {
         return state.shuttles.filter((shuttle: Shutlle) =>{
            return shuttle
-              .namaShuttle.toLowerCase()
-              .includes(state.filterQuery.toLowerCase())
+                    .namaShuttle.toLowerCase()
+                    .includes(state.filterQuery.toLowerCase()) || 
+                  shuttle
+                    .kotaId.namaKota.toLowerCase()
+                    .includes(state.filterQuery.toLowerCase()) 
         })
       }
     );

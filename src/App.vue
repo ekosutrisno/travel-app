@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
+import { computed, defineComponent, onMounted, reactive } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({
@@ -13,6 +13,9 @@ export default defineComponent({
   components: {},
   setup() {
     const store = useStore();
+    const state = reactive({
+      user: computed(() => store.state.userModule.user),
+    });
     onMounted(async () => {
       await store.dispatch("shuttleModule/setShuttleData");
       await store.dispatch("userModule/setUserData");

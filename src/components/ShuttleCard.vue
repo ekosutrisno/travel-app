@@ -1,11 +1,11 @@
 <template>
- <div :class="[checked ? 'from-indigo-400 to-basePurple text-white':'hover:from-indigo-400 hover:to-basePurple hover:text-white']" class="rounded-lg relative border p-2 flex flex-col space-y-2 group hover:shadow-xl bg-gradient-to-br transition-colors duration-150 cursor-pointer">
+ <div :class="[checked ? 'from-indigo-400 to-basePurple text-white':'hover:from-indigo-400 hover:to-basePurple hover:text-white']" class="rounded-lg relative border p-2 flex flex-col space-y-2 group hover:shadow-2xl bg-gradient-to-br transition cursor-pointer">
   <div class="inline-flex items-center space-x-2">
-    <svg xmlns="http://www.w3.org/2000/svg" :class="[checked ? 'text-gray-200':'group-hover:text-gray-200 text-gray-400 ']" class="h-5 w-5 transition-colors duration-150" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <svg xmlns="http://www.w3.org/2000/svg" :class="[checked ? 'text-gray-200':'group-hover:text-gray-200 text-gray-400 ']" class="h-5 w-5 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
     </svg>
-    <span>{{shuttle.namaShuttle}}</span>
+    <span class="truncate">{{shuttle.namaShuttle}}</span>
   </div>
   <div class="inline-flex items-center space-x-2">
     <span class="text-xs">{{shuttle.kotaId.namaKota}}</span>
