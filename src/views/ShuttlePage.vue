@@ -1,5 +1,5 @@
 <template>
- <header class="bg-gradient-to-r from-purple-700 to-basePurple h-80 px-4 sm:px-6 lg:px-16">
+ <header class="bg-gradient-to-r from-purple-700 to-basePurple h-full md:h-80 px-4 sm:px-6 lg:px-16">
    <div class="flex border-b border-indigo-700 border-opacity-50 items-center justify-between py-5 text-white">
      <div class="text-2xl font-semibold inline-flex items-center space-x-2">
        <span>
@@ -9,12 +9,24 @@
        </span>
        <span>TravelApp</span>
      </div>
-     <div class="inline-flex items-center space-x-2 font-semibold">
-       <p> {{ user ? user.nama : 'Consument'}} </p>
-       <img class="h-10 w-10 rounded-full border-2" src="https://cdn.dribbble.com/users/4113503/avatars/normal/8a6dc47aa73ff9ebd39c20141d4c9d86.png?1589054783" alt="profile">
-     </div>
+     <Menu as="div" class="ml-3 relative">
+        <div>
+          <MenuButton class="max-w-xs rounded-full cursor-default md:cursor-pointer flex items-center text-sm focus:outline-none">
+            <span class="sr-only">Open user menu</span>
+            <p class="mr-2"> {{ user ? user.nama : 'Consument'}} </p> 
+            <img class="h-10 w-10 rounded-full border-2" src="https://cdn.dribbble.com/users/4113503/avatars/normal/8a6dc47aa73ff9ebd39c20141d4c9d86.png?1589054783" alt="profile">
+          </MenuButton>
+        </div>
+        <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+          <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <MenuItem v-for="item in profile" :key="item" v-slot="{ active }">
+              <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item }}</a>
+            </MenuItem>
+          </MenuItems>
+        </transition>
+      </Menu>
    </div>
-   <div class="flex space-x-3 lg:space-x-10 items-center justify-center p-4 text-white">
+   <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:space-x-3 lg:space-x-10 items-center justify-center p-4 text-white">
      <div class="inline-block items-center space-y-1">
         <p class="text-xs">Kota Asal</p>
         <div class="p-2.5 shadow-sm hover:shadow-xl transition duration-100 font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
@@ -27,7 +39,7 @@
           <span> {{shuttleAsal ? shuttleAsal.namaShuttle : 'Pilih Shuttle Asal'}} </span>
         </div>
      </div>
-     <span class="-mb-5">
+     <span class="-mb-5 hidden md:block">
        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-purple-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
       </svg>
@@ -45,7 +57,7 @@
         </div>
      </div>
    </div>
-   <div class="flex flex-col items-center md:flex-row md:items-end justify-center mt-2">
+   <div class="flex py-4 md:py-0 flex-col items-center md:flex-row md:items-end justify-center mt-2">
       <div class="inline-block items-center  space-y-1 text-white">
           <p class="text-xs text-center">Jam Keberangkatan</p>
           <div @click="setSelectedJam(jamKbr)" v-for="jamKbr in jamKeberangkatan" :key="jamKbr.jamKeberangkatanId" class="p-2.5 mx-2 relative shadow-sm font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
@@ -74,10 +86,12 @@
  
  <!-- Shuttle -->
  <section class="grid h-full border-b md:grid-cols-2 px-4 sm:px-6 lg:px-16">
-   <div class="border-b md:border-r md:border-b-0 p-4 px-8">
+   <div class="border-b md:border-r md:border-b-0 p-4 md:px-8">
      <header class="col-start-1 my-3 row-start-1 flex flex-wrap items-baseline">
        <h2 class="flex-none text-lg leading-6 font-medium text-gray-900 mr-3">Asal</h2>
-       <p class="hidden sm:block flex-auto text-gray-400 text-sm leading-5 font-medium">Semua Pilihan Shuttle Asal</p><p class="hidden sm:block flex-none w-full text-sm leading-5 mt-3">Merupakan pilihan semua terminal asal keberangkatan dan diharapkan Anda memilih dengan teliti.</p>
+       <p class="block flex-auto text-gray-400 text-sm leading-5 font-medium">Semua Pilihan Shuttle Asal
+       </p>
+       <p class="block flex-none w-full text-sm leading-5 mt-3">Merupakan pilihan semua terminal Asal keberangkatan dan diharapkan Anda memilih dengan teliti.</p>
      </header>
     <div class="grid md:grid-cols-2 gap-4 py-3">
       <ShuttleCard 
@@ -89,10 +103,11 @@
         />
     </div>
    </div>
-   <div class="p-4 px-8">
+   <div class="p-4 md:px-8">
      <header class="col-start-1 my-3 row-start-1 flex flex-wrap items-baseline">
        <h2 class="flex-none text-lg leading-6 font-medium text-gray-900 mr-3">Tujuan</h2>
-       <p class="hidden sm:block flex-auto text-gray-400 text-sm leading-5 font-medium">Semua Pilihan Shuttle Tujuan</p><p class="hidden sm:block flex-none w-full text-sm leading-5 mt-3">Merupakan pilihan semua terminal tujuan keberangkatan dan diharapkan Anda memilih dengan teliti.</p>
+       <p class="flex-auto text-gray-400 text-sm leading-5 font-medium">Semua Pilihan Shuttle Tujuan</p>
+       <p class="flex-none w-full text-sm leading-5 mt-3">Merupakan pilihan semua terminal tujuan keberangkatan dan diharapkan Anda memilih dengan teliti.</p>
      </header>
     <div class="grid md:grid-cols-2 gap-4 py-3">
       <ShuttleCard 
@@ -108,7 +123,7 @@
 
  <!-- Footer -->
  <footer class="flex flex-col md:flex-row items-center justify-between py-5 bg-gray-50 px-4 sm:px-6 lg:px-16">
-   <div class="inline-flex items-center space-x-3 text-sm">
+   <div class="md:inline-flex items-center md:space-x-3 text-sm">
       <div class="inline-flex items-center space-x-2">
         <img class="h-8 w-8 rounded-full border" src="https://avatars.githubusercontent.com/u/77217289?s=64&v=4" alt="safrizal">
         <p>Backend by <a class="text-indigo-400 hover:text-opacity-70 font-semibold" href="https://github.com/safrizal997" target="_blank">@Safrizal</a></p>
@@ -127,9 +142,20 @@ import { computed, defineComponent, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import { JamKeberangkatan, Shutlle } from "../@types/interface";
 import ShuttleCard from "../components/ShuttleCard.vue";
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+const profile = ['Your Profile', 'History', 'Settings', 'Sign out']
 
 export default defineComponent({
-  components: { ShuttleCard },
+  components: {
+    ShuttleCard, 
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems, 
+  },
   setup() {
     const store = useStore();
     const state = reactive({
@@ -167,6 +193,7 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
+      profile,
       filteredShuttle,
       setSelectedShuttle,
       setSelectedJam

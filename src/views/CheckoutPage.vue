@@ -1,70 +1,72 @@
 <template>
-   <div class="h-full relative min-h-screen flex items-center justify-center">
-      <!-- <BgWorld class="absolute inset-0 max-w-5xl mx-auto opacity-40"/> -->
-      <div class="grid overflow-hidden z-20 grid-cols-2 w-full max-w-5xl  mx-auto border-2 border-purple-400 rounded-md">
-         <div class="bg-gradient-to-br from-purple-700 to-basePurple">
-            <div class="flex flex-col space-y-3 items-center justify-center p-4 text-white">
-               <div class="flex flex-col items-center justify-center space-y-1">
-                  <p class="text-xs">Kota Asal</p>
-                  <div class="p-2.5 shadow-sm hover:shadow-xl transition duration-100 font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
-                     <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                     </span>
-                     <span> {{shuttleAsal ? shuttleAsal.namaShuttle : 'Pilih Shuttle Asal'}} </span>
-                  </div>
-               </div>
-               <span class="-mb-5">
-                  <svg xmlns="http://www.w3.org/2000/svg" area-hidden="true" class="h-6 w-6 text-purple-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 17l-4 4m0 0l-4-4m4 4V3" />
-                  </svg>         
-               </span>
-               <div class="flex flex-col items-center justify-center space-y-1">
-                  <p class="text-xs">Kota Tujuan</p>
-                  <div class="p-2.5 shadow-sm hover:shadow-xl transition duration-100 font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-basePurple border border-opacity-50 border-purple-400">
-                     <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                        </svg>
-                     </span>
-                     <span>  {{shuttleTujuan ? shuttleTujuan.namaShuttle : 'Pilih Shuttle Tujuan'}} </span>
-                  </div>
-               </div>
-               <header class="col-start-1 my-3 row-start-1 flex flex-wrap items-baseline">
-                  <h2 class="flex-none text-lg leading-6 font-medium text-gray-200 mr-3">Info</h2>
-                  <p class="hidden sm:block flex-auto text-gray-300 text-sm leading-5 font-medium">Info order ticket anda</p>
-                  <p class="hidden sm:block flex-none w-full text-sm leading-5 mt-1">Anda telah mealakukan pemilihan detail pemesanan tiket anda, dan anda akan berangkat pada pukul <span class="font-semibold">{{jam.jam}}</span> WIB, dan diharapkan agar datang 1 jam sebelum jam keberangkatan.</p>
-               </header>
-            </div>
-         </div>
-         <div class="p-4 px-8">
+   <div class="h-full relative min-h-screen p-4 flex items-center justify-center">
+      <div class="relative w-full max-w-xl  mx-auto border border-purple-200 rounded-md">
+         <img class="absolute top-0 right-2 w-16 sm:w-24 rounded-full" src="https://www.bankmandiri.co.id/image/journal/article?img_id=44321257&t=1615601162953" alt="logo">
+         <div class="p-4 md:px-8">
             <header class="col-start-1 my-3 row-start-1 flex flex-wrap items-baseline">
-               <h2 class="flex-none text-lg leading-6 font-medium text-gray-800 mr-3">Payment Details (Test)</h2>
-               <p class="hidden sm:block flex-none w-full text-sm leading-5 mt-1">Complete your purchase by providing your payment details.</p>
+               <h2 class="flex-none text-lg leading-6 font-medium text-gray-800 mr-3">Payment Details</h2>
+               <p class="block flex-none w-full text-sm leading-5 mt-1">Complete your purchase by providing your payment details.</p>
+               <div class="mt-4 md:space-x-2">
+                   <div class="inline-block items-center space-y-1">
+                     <p class="text-xs">Kota Asal</p>
+                     <div class="p-1.5 sm:p-2.5 text-sm text-gray-500 font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-white sm:border border-opacity-50 hover:bg-basePurple hover:text-white">
+                        <span>
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                           </svg>
+                        </span>
+                        <span> {{shuttleAsal ? shuttleAsal.namaShuttle : 'Pilih Shuttle Asal'}} </span>
+                     </div>
+                  </div>
+                   <div class="inline-block items-center space-y-1">
+                     <p class="text-xs">Kota Tujuan</p>
+                     <div class="p-1.5 sm:p-2.5 text-sm text-gray-500 font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-white sm:border border-opacity-50 hover:bg-basePurple hover:text-white">
+                        <span>
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                           </svg>
+                        </span>
+                        <span> {{shuttleTujuan ? shuttleTujuan.namaShuttle : 'Pilih Shuttle Tujuan'}} </span>
+                     </div>
+                  </div>
+                   <div class="inline-block items-center space-y-1">
+                     <p class="text-xs">Biaya</p>
+                     <div class="p-1.5 sm:p-2.5 text-sm text-gray-500 font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-white sm:border border-opacity-50 hover:bg-basePurple hover:text-white">
+                        <span>
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                           </svg>
+                        </span>
+                        <span> Rp35000 </span>
+                     </div>
+                  </div>
+               </div>
             </header>
-            <form @submit.prevent="bayarAction">
+            <form @submit.prevent="bayarAction" class="space-y-3">
                <div class="col-span-6 sm:col-span-3">
                   <label for="nama_penumpang" class="block text-sm font-medium text-gray-700">Nama penumpang</label>
-                  <input type="text" name="nama_penumpang" :value="user.nama" id="nama_penumpang" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                  <input type="text" required name="nama_penumpang" :value="user.nama" id="nama_penumpang" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-sm" placeholder="ex: Bambang"/>
                </div>
                <div class="col-span-6 sm:col-span-3">
                   <label for="tanggal_berangkat"  class="block text-sm font-medium text-gray-700">Tanggal berangkat</label>
                   <input type="date" required name="tanggal_berangkat" v-model="tanggalKeberangkatan" id="tanggal_berangkat" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
                </div>
-               <div class="grid grid-cols-2 gap-2 mt-4">
+               <div class="grid md:grid-cols-2 gap-2 mt-4">
                   <div>
                      <label for="no_telepone" class="block text-sm font-medium text-gray-700">No Telephone</label>
-                     <input type="text" required name="no_telepone" v-model="nomorTelephone" id="no_telepone" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                     <input type="number" min="0" required name="no_telepone" v-model.number="nomorTelephone" id="no_telepone" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-sm" placeholder="ex: 089912348822" />
                   </div>
                   <div>
                      <label for="no_kursi" class="block text-sm font-medium text-gray-700">Nomor Kursi</label>
-                     <input type="number" required name="no_kursi" min="0" v-model.number="nomorKursi" id="no_kursi" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md" />
+                     <input type="number" required name="no_kursi" min="0" max="36" v-model.number="nomorKursi" id="no_kursi" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-sm" placeholder="ex: 1 range(1-36)"/>
                   </div>
                </div>
-               <div class="mt-4">
+               <div class="py-6 border-t grid sm:grid-cols-2 gap-4">
+                  <button type="button" @click="$router.back()" class="group relative w-full flex justify-center py-2 px-4 border text-sm font-medium rounded-md text-basePurple hover:border-basePurple">
+                     Cancel or Edit
+                  </button>
                   <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-basePurple hover:bg-base100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                      Bayar Rp35000
                   </button>
@@ -79,10 +81,8 @@
 import { computed, defineComponent, onMounted, reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex'
-import BgWorld from '../components/svg/BgWorld.vue';
 
 export default defineComponent({
-  components: { BgWorld },
    setup () {
       const store = useStore();
       const route = useRoute();
