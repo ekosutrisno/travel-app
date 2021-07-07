@@ -22,11 +22,15 @@ const transactionModule: Module<StoreTransaction, State> = {
       setTransaction({ commit }, userId: number): void {
          apiService.get(`/transaction/${userId}/transactions`)
             .then((res: AxiosResponse<Transaction[]>) => {
-               commit('SET_TRANSACTIONS', res.data);
+               var dataShorted: Transaction[] = res.data
+               .sort((a: Transaction, b: Transaction) => a.tanggal > b.tanggal ? 1 : ((b.tanggal > a.tanggal) ? -1 : 0))
+               .reverse();
+
+               commit('SET_TRANSACTIONS', dataShorted);
             });
       },
+
       async checkoutAction({ dispatch }, payload: any): Promise<void> {
-         console.log(payload);
          await apiService.post(`/transaction`, payload)
             .then(() => {
                dispatch('setTransaction', payload.userId);

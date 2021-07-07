@@ -47,7 +47,7 @@
             <form @submit.prevent="bayarAction" class="space-y-3">
                <div class="col-span-6 sm:col-span-3">
                   <label for="nama_penumpang" class="block text-sm font-medium text-gray-700">Nama penumpang</label>
-                  <input type="text" required name="nama_penumpang" :value="user.nama" id="nama_penumpang" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-sm" placeholder="ex: Bambang"/>
+                  <input type="text" required name="nama_penumpang" readonly  :value="user.nama" id="nama_penumpang" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-sm" placeholder="ex: Bambang"/>
                </div>
                <div class="col-span-6 sm:col-span-3">
                   <label for="tanggal_berangkat"  class="block text-sm font-medium text-gray-700">Tanggal berangkat</label>
@@ -78,7 +78,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, reactive, toRefs } from 'vue'
+import { computed, defineComponent, reactive, toRefs } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 import { useStore } from 'vuex'
 
@@ -89,19 +89,14 @@ export default defineComponent({
       const router = useRouter();
 
       const state = reactive({
-         transactions: computed(()=> store.state.transactionModule.transactions),
          shuttleAsal: computed(()=> store.state.shuttleModule.shuttleAsal),
          shuttleTujuan: computed(()=> store.state.shuttleModule.shuttleTujuan),
          jam: computed(()=> store.state.shuttleModule.jam),
          user: computed(()=>store.state.userModule.user),
          tanggalKeberangkatan: '',
          nomorTelephone: '',
-         nomorKursi: ''
+         nomorKursi: '',
       });
-
-      onMounted(async ()=>{
-         await store.dispatch('transactionModule/setTransaction', route.params.userId);
-      })
 
       const converTanggal = (tanggal: any) =>{
          var tglReplace = tanggal.replaceAll('-','');

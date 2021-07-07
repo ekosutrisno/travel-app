@@ -4,7 +4,7 @@ import { State } from "..";
 import { User } from "../../@types/interface";
 import apiService from '../../config/axiosConfig';
 
-interface StoreUser {
+export interface StoreUser {
    users: User[],
    user: any
 }

@@ -19,8 +19,8 @@
         </div>
         <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
           <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <MenuItem v-for="item in profile" :key="item" v-slot="{ active }">
-              <a href="#" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item }}</a>
+            <MenuItem v-for="item in profiles" :key="item.title" v-slot="{ active }">
+              <router-link :to="item.to" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"> {{ item.title }} </router-link>
             </MenuItem>
           </MenuItems>
         </transition>
@@ -143,7 +143,29 @@ import { useStore } from "vuex";
 import { JamKeberangkatan, Shutlle } from "../@types/interface";
 import ShuttleCard from "../components/ShuttleCard.vue";
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-const profile = ['Your Profile', 'History', 'Settings', 'Sign out']
+interface IMenuItem{
+   title?: string,
+   to?: string
+}
+
+const profile: IMenuItem[] = [
+    {
+      title: 'Your Profile',
+      to: '#'
+    }, 
+    {
+      title: 'History',
+      to: '/u/histories'
+    },
+    {
+      title: 'Settings',
+      to: '#'
+    },
+    {
+      title: 'Sign out',
+      to: '#'
+    },
+  ]
 
 export default defineComponent({
   components: {
@@ -165,7 +187,8 @@ export default defineComponent({
       jam: computed(()=> store.state.shuttleModule.jam),
       shuttleAsal: computed(()=> store.state.shuttleModule.shuttleAsal),
       shuttleTujuan: computed(()=> store.state.shuttleModule.shuttleTujuan),
-      user: computed(()=>store.state.userModule.user)
+      user: computed(()=>store.state.userModule.user),
+      profiles: profile
     });
 
     const filteredShuttle = computed(() => {
@@ -193,7 +216,6 @@ export default defineComponent({
 
     return {
       ...toRefs(state),
-      profile,
       filteredShuttle,
       setSelectedShuttle,
       setSelectedJam

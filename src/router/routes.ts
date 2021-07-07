@@ -4,6 +4,7 @@ import Welcome from '../views/Welcome.vue';
 import Home from '../views/Home.vue';
 import ShuttlePage from '../views/ShuttlePage.vue';
 import CheckoutPage from '../views/CheckoutPage.vue';
+import HistoryPage from '../views/HistoryPage.vue';
 
 const routes: RouteRecordRaw[] = [
    {
@@ -36,6 +37,14 @@ const routes: RouteRecordRaw[] = [
       component: CheckoutPage,
       meta: {
          title: 'Checkout'
+      }
+   },
+   {
+      path: '/u/histories',
+      name: 'History',
+      component: HistoryPage,
+      meta: {
+         title: 'History'
       }
    },
 ];

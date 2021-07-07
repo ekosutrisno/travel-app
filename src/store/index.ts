@@ -13,8 +13,8 @@ export const key: InjectionKey<Store<State>> = Symbol();
 
 const store = createStore<State>({
    modules,
-   strict: IS_DEV,
-   plugins: IS_DEV ? [createLogger()] : []
+   // strict: IS_DEV,
+   // plugins: IS_DEV ? [createLogger()] : []
 });
 
 export function useStore() {
