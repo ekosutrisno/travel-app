@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white min-h-screen font-quicksand">
+  <div class="bg-white min-h-screen nv-transition font-quicksand">
     <router-view></router-view>
   </div>
 </template>
@@ -13,9 +13,6 @@ export default defineComponent({
   components: {},
   setup() {
     const store = useStore();
-    const state = reactive({
-      user: computed(() => store.state.userModule.user),
-    });
     onMounted(async () => {
       await store.dispatch("shuttleModule/setShuttleData");
       await store.dispatch("userModule/setUserData");
@@ -27,5 +24,17 @@ export default defineComponent({
 </script>
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap");
+
+.nv-transition {
+  animation: 0.5s appear;
+}
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 </style>
 

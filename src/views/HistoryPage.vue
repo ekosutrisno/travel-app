@@ -3,8 +3,8 @@
    <div class="flex border-b border-indigo-700 border-opacity-50 items-center justify-between py-5 text-white">
      <div class="text-2xl font-semibold inline-flex items-center space-x-2">
        <span>
-         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
         </svg>
        </span>
        <span>History</span>
@@ -26,76 +26,14 @@
         </transition>
       </Menu>
    </div>
- </header>
+</header>
  <section class="grid relative -mt-56 h-full sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 pb-5 sm:px-6 lg:px-16">
-      <div 
-        v-for="(trx, idx) in transactions" 
-        :key="trx.transaksiId" 
-        class="p-4 hover:shadow-xl bg-pattern relative cursor-pointer rounded border bg-white"
-      >
-      <svg xmlns="http://www.w3.org/2000/svg" area-hidden="true" :class="[idx == 0 ? 'text-basePurple': 'text-gray-300']" class="absolute top-3 right-2 h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
-      </svg>
-        <div class="inline-flex w-full py-2 items-center border-b">
-            <span class="p-2 bg-gray-100 text-purple-400 rounded-md">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
-              </svg>
-            </span>
-            <p class="p-2">
-              <span class="block text-sm font-semibold">{{ trx.namaPenumpang}}</span>
-              <span class="block text-xs text-gray-400">{{ trx.userId.level}} | {{trx.nomorHP}}</span>
-            </p>
-        </div>
-        <div class="flex flex-col border-b w-full space-y-2 p-2">
-           <div class="text-sm">
-             <p class="text-xs text-gray-400">Terminal Asal</p>
-             <p>{{ trx.asalShuttelId.namaShuttle }} <span class="text-xs text-gray-400">({{trx.asalShuttelId.kotaId.namaKota}})</span></p>
-           </div>
-           <div class="text-sm">
-             <p class="text-xs text-gray-400">Terminal Tujuan</p>
-             <p>{{ trx.tujuanShuttelId.namaShuttle }} <span class="text-xs text-gray-400">({{trx.tujuanShuttelId.kotaId.namaKota}})</span></p>
-           </div>
-           <div class="text-sm">
-             <p class="text-xs text-gray-400">Nomor Kursi</p>
-             <p>{{ trx.nomorKursi }}</p>
-           </div>
-           <div class="text-sm">
-             <p class="text-xs text-gray-400">Tanggal Keberangkatan</p>
-             <p>{{ formatDate(trx.tanggal) }}</p>
-           </div>
-           <div class="text-sm">
-             <p class="text-xs text-gray-400">Jam Keberangkatan</p>
-             <p> {{trx.jamKeberangkatanId.jam}} WIB</p>
-           </div>
-           <div class="text-sm">
-             <p class="text-xs text-gray-400">Kode Bus</p>
-             <p> A334-{{idx}}</p>
-           </div>
-        </div>
-        <div class="flex flex-col border-b w-full space-y-2 p-2">
-          <div class="text-sm inline-flex justify-between w-full">
-             <p class="text-xs text-gray-400">Harga Tiket</p>
-             <p> Rp{{trx.harga ? trx.harga.harga : 35000}}</p>
-           </div>
-          <div class="text-sm inline-flex justify-between w-full">
-             <p class="text-xs text-gray-400">Biaya Admin</p>
-             <p> Rp{{2500}}</p>
-          </div>
-        </div>
-        <div class="flex flex-col w-full p-2">
-          <div class="text-sm inline-flex justify-between w-full font-semibold">
-             <p class="text-xs text-gray-400">Total Harga</p>
-             <p> Rp{{trx.harga ? trx.harga.harga + 2500 : (35000 + 2500)}}</p>
-          </div>
-        </div>
-        <div class="flex flex-col w-full p-2">
-          <div class="text-xs w-full">
-             <p class="text-gray-400 mb-2">Order Descriptions</p>
-             <p>Anda telah mealakukan pemesanan tiket anda, diharapkan tiba 1 jam sebelum keberangkatan. Refund minimal h-1 keberangkatan.</p>
-          </div>
-        </div>
-      </div>
+     <TransactionHistoryCard 
+        v-for="(trx, idx) in transactions"
+        :key="idx"
+        :idx="idx"
+        :trx="trx"
+     />
  </section>
 </template>
 
@@ -103,7 +41,7 @@
 import { computed, defineComponent, onMounted, reactive, toRefs } from 'vue'
 import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { useStore } from 'vuex'
-import moment from 'moment';
+import TransactionHistoryCard from '../components/TransactionHistoryCard.vue'
 
 interface IMenuItem{
    title?: string,
@@ -130,49 +68,39 @@ const profile: IMenuItem[] = [
   ]
 
 export default defineComponent({
-    components: {
+  components: {
     Disclosure,
     DisclosureButton,
     DisclosurePanel,
     Menu,
     MenuButton,
     MenuItem,
-    MenuItems, 
+    MenuItems,
+    TransactionHistoryCard
   },
-   setup () {
+  setup () {
       
-      const store = useStore();
-      const state = reactive({
-         user: computed(()=>store.state.userModule.user),
-         transactions: computed(()=> store.state.transactionModule.transactions),
-         profiles: profile
-      })
+    const store = useStore();
+    const state = reactive({
+        user: computed(()=>store.state.userModule.user),
+        transactions: computed(()=> store.state.transactionModule.transactions),
+        profiles: profile
+    })
 
-      onMounted(()=>{
-          store.dispatch('transactionModule/setTransaction', state.user.userId);
-      })
+    onMounted(()=>{
+        store.dispatch('transactionModule/setTransaction', state.user.userId);
+    })
 
-
-      function formatDate(date:number): string {
-        var year = date.toString().substring(0,4);
-        var month = date.toString().substring(4,6);
-        var day = date.toString().substring(6, date.toString().length);
-        var theDate = new Date(parseInt(year), parseInt(month), parseInt(day));
-        return moment(theDate).format('ll')
-      }
-
-
-      return {
-         ...toRefs(state),
-         formatDate
-      }
-   }
+    return {
+        ...toRefs(state)
+    }
+  }
 })
 </script>
 <style scoped>
   .bg-pattern{
-    background-color: #fdfcff;
-    background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M81.28 88H68.413l19.298 19.298L81.28 88zm2.107 0h13.226L90 107.838 83.387 88zm15.334 0h12.866l-19.298 19.298L98.72 88zm-32.927-2.207L73.586 78h32.827l.5.5 7.294 7.293L115.414 87l-24.707 24.707-.707.707L64.586 87l1.207-1.207zm2.62.207L74 80.414 79.586 86H68.414zm16 0L90 80.414 95.586 86H84.414zm16 0L106 80.414 111.586 86h-11.172zm-8-6h11.173L98 85.586 92.414 80zM82 85.586L87.586 80H76.414L82 85.586zM17.414 0L.707 16.707 0 17.414V0h17.414zM4.28 0L0 12.838V0h4.28zm10.306 0L2.288 12.298 6.388 0h8.198zM180 17.414L162.586 0H180v17.414zM165.414 0l12.298 12.298L173.612 0h-8.198zM180 12.838L175.72 0H180v12.838zM0 163h16.413l.5.5 7.294 7.293L25.414 172l-8 8H0v-17zm0 10h6.613l-2.334 7H0v-7zm14.586 7l7-7H8.72l-2.333 7h8.2zM0 165.414L5.586 171H0v-5.586zM10.414 171L16 165.414 21.586 171H10.414zm-8-6h11.172L8 170.586 2.414 165zM180 163h-16.413l-7.794 7.793-1.207 1.207 8 8H180v-17zm-14.586 17l-7-7h12.865l2.333 7h-8.2zM180 173h-6.613l2.334 7H180v-7zm-21.586-2l5.586-5.586 5.586 5.586h-11.172zM180 165.414L174.414 171H180v-5.586zm-8 5.172l5.586-5.586h-11.172l5.586 5.586zM152.933 25.653l1.414 1.414-33.94 33.942-1.416-1.416 33.943-33.94zm1.414 127.28l-1.414 1.414-33.942-33.94 1.416-1.416 33.94 33.943zm-127.28 1.414l-1.414-1.414 33.94-33.942 1.416 1.416-33.943 33.94zm-1.414-127.28l1.414-1.414 33.942 33.94-1.416 1.416-33.94-33.943zM0 85c2.21 0 4 1.79 4 4s-1.79 4-4 4v-8zm180 0c-2.21 0-4 1.79-4 4s1.79 4 4 4v-8zM94 0c0 2.21-1.79 4-4 4s-4-1.79-4-4h8zm0 180c0-2.21-1.79-4-4-4s-4 1.79-4 4h8z' fill='%23a65fec' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M81.28 88H68.413l19.298 19.298L81.28 88zm2.107 0h13.226L90 107.838 83.387 88zm15.334 0h12.866l-19.298 19.298L98.72 88zm-32.927-2.207L73.586 78h32.827l.5.5 7.294 7.293L115.414 87l-24.707 24.707-.707.707L64.586 87l1.207-1.207zm2.62.207L74 80.414 79.586 86H68.414zm16 0L90 80.414 95.586 86H84.414zm16 0L106 80.414 111.586 86h-11.172zm-8-6h11.173L98 85.586 92.414 80zM82 85.586L87.586 80H76.414L82 85.586zM17.414 0L.707 16.707 0 17.414V0h17.414zM4.28 0L0 12.838V0h4.28zm10.306 0L2.288 12.298 6.388 0h8.198zM180 17.414L162.586 0H180v17.414zM165.414 0l12.298 12.298L173.612 0h-8.198zM180 12.838L175.72 0H180v12.838zM0 163h16.413l.5.5 7.294 7.293L25.414 172l-8 8H0v-17zm0 10h6.613l-2.334 7H0v-7zm14.586 7l7-7H8.72l-2.333 7h8.2zM0 165.414L5.586 171H0v-5.586zM10.414 171L16 165.414 21.586 171H10.414zm-8-6h11.172L8 170.586 2.414 165zM180 163h-16.413l-7.794 7.793-1.207 1.207 8 8H180v-17zm-14.586 17l-7-7h12.865l2.333 7h-8.2zM180 173h-6.613l2.334 7H180v-7zm-21.586-2l5.586-5.586 5.586 5.586h-11.172zM180 165.414L174.414 171H180v-5.586zm-8 5.172l5.586-5.586h-11.172l5.586 5.586zM152.933 25.653l1.414 1.414-33.94 33.942-1.416-1.416 33.943-33.94zm1.414 127.28l-1.414 1.414-33.942-33.94 1.416-1.416 33.94 33.943zm-127.28 1.414l-1.414-1.414 33.94-33.942 1.416 1.416-33.943 33.94zm-1.414-127.28l1.414-1.414 33.942 33.94-1.416 1.416-33.94-33.943zM0 85c2.21 0 4 1.79 4 4s-1.79 4-4 4v-8zm180 0c-2.21 0-4 1.79-4 4s1.79 4 4 4v-8zM94 0c0 2.21-1.79 4-4 4s-4-1.79-4-4h8zm0 180c0-2.21-1.79-4-4-4s-4 1.79-4 4h8z' fill='%239C92AC' fill-opacity='0.075' fill-rule='evenodd'/%3E%3C/svg%3E");
   }
 
 </style>

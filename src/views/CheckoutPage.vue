@@ -1,7 +1,35 @@
 <template>
-   <div class="h-full relative min-h-screen p-4 flex items-center justify-center">
-      <div class="relative w-full max-w-xl  mx-auto border border-purple-200 rounded-md">
-         <img class="absolute top-0 right-2 w-16 sm:w-24 rounded-full" src="https://www.bankmandiri.co.id/image/journal/article?img_id=44321257&t=1615601162953" alt="logo">
+<header class="bg-gradient-to-r from-purple-700 to-basePurple h-80 px-4 sm:px-6 lg:px-16">
+   <div class="flex border-b border-indigo-700 border-opacity-50 items-center justify-between py-5 text-white">
+     <div class="text-2xl font-semibold inline-flex items-center space-x-2">
+       <span>
+         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+         </svg>
+       </span>
+       <span>Checkout</span>
+     </div>
+     <Menu as="div" class="ml-3 relative z-40">
+        <div>
+          <MenuButton class="max-w-xs rounded-full cursor-default md:cursor-pointer flex items-center text-sm focus:outline-none">
+            <span class="sr-only">Open user menu</span>
+            <p class="mr-2"> {{ user ? user.nama : 'Consument'}} </p> 
+            <img class="h-10 w-10 rounded-full border-2" src="https://cdn.dribbble.com/users/4113503/avatars/normal/8a6dc47aa73ff9ebd39c20141d4c9d86.png?1589054783" alt="profile">
+          </MenuButton>
+        </div>
+        <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
+          <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
+            <MenuItem v-for="item in profiles" :key="item.title" v-slot="{ active }">
+              <router-link :to="item.to" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.title }}</router-link>
+            </MenuItem>
+          </MenuItems>
+        </transition>
+      </Menu>
+   </div>
+</header>
+   <section class="-mt-56 relative h-full px-4 pb-5 flex items-center justify-center">
+      <div class="relative w-full bg-white max-w-xl mx-auto border rounded-md">
+         
          <div class="p-4 md:px-8">
             <header class="col-start-1 my-3 row-start-1 flex flex-wrap items-baseline">
                <h2 class="flex-none text-lg leading-6 font-medium text-gray-800 mr-3">Payment Details</h2>
@@ -44,7 +72,7 @@
                   </div>
                </div>
             </header>
-            <form @submit.prevent="bayarAction" class="space-y-3">
+            <form @submit.prevent="doTransaction" class="space-y-3">
                <div class="col-span-6 sm:col-span-3">
                   <label for="nama_penumpang" class="block text-sm font-medium text-gray-700">Nama penumpang</label>
                   <input type="text" required name="nama_penumpang" readonly  :value="user.nama" id="nama_penumpang" autocomplete="given-name" class="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md text-sm" placeholder="ex: Bambang"/>
@@ -67,25 +95,58 @@
                   <button type="button" @click="$router.back()" class="group relative w-full flex justify-center py-2 px-4 border text-sm font-medium rounded-md text-basePurple hover:border-basePurple">
                      Cancel or Edit
                   </button>
-                  <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-basePurple hover:bg-base100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                  <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-basePurple hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                      Bayar Rp35000
                   </button>
                </div>
             </form>
          </div>
       </div>
-   </div>
+   </section>
 </template>
 
 <script lang="ts">
 import { computed, defineComponent, reactive, toRefs } from 'vue'
-import { useRoute, useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
 import { useStore } from 'vuex'
+import { converTanggal } from '../config/utills';
+import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
+interface IMenuItem{
+   title?: string,
+   to?: string
+}
+
+const profile: IMenuItem[] = [
+    {
+      title: 'Your Profile',
+      to: '#'
+    }, 
+    {
+      title: 'History',
+      to: '/u/histories'
+    },
+    {
+      title: 'Settings',
+      to: '#'
+    },
+    {
+      title: 'Sign out',
+      to: '#'
+    },
+  ]
 
 export default defineComponent({
+   components:{
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+   },
    setup () {
       const store = useStore();
-      const route = useRoute();
       const router = useRouter();
 
       const state = reactive({
@@ -93,17 +154,13 @@ export default defineComponent({
          shuttleTujuan: computed(()=> store.state.shuttleModule.shuttleTujuan),
          jam: computed(()=> store.state.shuttleModule.jam),
          user: computed(()=>store.state.userModule.user),
+         profiles: profile,
          tanggalKeberangkatan: '',
          nomorTelephone: '',
          nomorKursi: '',
       });
 
-      const converTanggal = (tanggal: any) =>{
-         var tglReplace = tanggal.replaceAll('-','');
-         return parseInt(tglReplace);
-      }
-
-      const bayarAction = ()=>{
+      const doTransaction = () => {
          
          var dataTransaction = {
             asalShuttelId: state.shuttleAsal.shuttleId,
@@ -124,7 +181,7 @@ export default defineComponent({
 
       return {
          ...toRefs(state),
-         bayarAction
+         doTransaction
       }
    }
 })
