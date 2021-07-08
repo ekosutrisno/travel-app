@@ -30,7 +30,7 @@
  <section class="grid relative -mt-56 h-full sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 pb-5 sm:px-6 lg:px-16">
      <TransactionHistoryCard 
         v-for="(trx, idx) in transactions"
-        :key="idx"
+        :key="trx.transaksiId"
         :idx="idx"
         :trx="trx"
      />

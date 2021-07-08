@@ -84,7 +84,6 @@ export default defineComponent({
          required: true
       },
       idx:{
-         type: Number,
          required: true
       }
    },
