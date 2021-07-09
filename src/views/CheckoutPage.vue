@@ -71,7 +71,7 @@
                      Cancel or Edit
                   </button>
                   <button type="submit" class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-basePurple hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                     Bayar Rp35000
+                     Bayar Rp350000
                   </button>
                </div>
             </form>

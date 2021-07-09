@@ -2,7 +2,7 @@
 <header class="bg-gradient-to-r from-purple-700 to-basePurple h-80 px-4 sm:px-6 lg:px-16">
    <Header :title="'History'"/>
 </header>
- <section class="grid nv-transition relative -mt-56 h-full sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 pb-5 sm:px-6 lg:px-16">
+ <section v-if="transactions.length" class="grid nv-transition relative -mt-56 h-full sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 pb-5 sm:px-6 lg:px-16">
      <TransactionHistoryCard 
         v-for="(trx, idx) in transactions"
         :key="trx.transaksiId"
@@ -10,6 +10,11 @@
         :trx="trx"
      />
  </section>
+  <section v-else class="w-full p-4 flex items-center justify-center">
+    <div class="card p-5 rounded-md border">
+      Tidak Ada Riwayat Transaksi.
+    </div>
+  </section>
 </template>
 
 <script lang="ts">

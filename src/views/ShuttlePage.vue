@@ -3,9 +3,9 @@
    <Header :title="'Shuttles'"/>
    <div class="grid lg:grid-cols-2">
      <div class="w-full hidden lg:block flex-none text-center xl:w-auto xl:flex-auto xl:text-left mt-10">
-       <h1 class="font-display text-white text-3xl leading-9 font-semibold sm:text-4xl sm:leading-10">
+       <router-link to="/" class="font-display text-white text-3xl leading-9 font-semibold sm:text-4xl sm:leading-10">
          TravelApp
-       </h1>
+       </router-link>
       <div class="flex flex-wrap justify-center xl:justify-start whitespace-no-wrap text-purple-100 font-medium mt-3 leading-5">
           <div class="flex items-center mx-3 sm:mx-4 xl:ml-0 xl:mr-8 mt-3">
             <div class="mr-2"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" class="text-purple-400"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"></path></svg>
