@@ -1,53 +1,18 @@
 <template>
  <header class="bg-gradient-to-r from-purple-700 to-basePurple h-full md:h-80 px-4 sm:px-6 lg:px-16">
-   <div class="flex border-b border-indigo-700 border-opacity-50 items-center justify-between py-5 text-white">
-     <router-link to="/" class="text-2xl font-semibold inline-flex items-center space-x-2">
-       <span>
-         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-       </span>
-       <span>TravelApp</span>
-     </router-link>
-     <Menu as="div" class="ml-3 relative">
-        <div>
-          <MenuButton class="max-w-xs rounded-full cursor-default md:cursor-pointer flex items-center text-sm focus:outline-none">
-            <span class="sr-only">Open user menu</span>
-            <p class="mr-2"> {{ user ? user.nama : 'Consument'}} </p> 
-            <img class="h-10 w-10 rounded-full border-2" src="https://cdn.dribbble.com/users/4113503/avatars/normal/8a6dc47aa73ff9ebd39c20141d4c9d86.png?1589054783" alt="profile">
-          </MenuButton>
-        </div>
-        <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-          <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <MenuItem v-for="item in profiles" :key="item.title" v-slot="{ active }">
-              <router-link :to="item.to" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']"> {{ item.title }} </router-link>
-            </MenuItem>
-          </MenuItems>
-        </transition>
-      </Menu>
-   </div>
+   <Header :title="'Shuttles'"/>
    <div class="grid lg:grid-cols-2">
      <div class="w-full hidden lg:block flex-none text-center xl:w-auto xl:flex-auto xl:text-left mt-10">
        <h1 class="font-display text-white text-3xl leading-9 font-semibold sm:text-4xl sm:leading-10">
-         No longer the era for slow Travel,<!-- --> <span class="sm:block text-purple-300">reaches all corners of the country.</span>
+         TravelApp
        </h1>
       <div class="flex flex-wrap justify-center xl:justify-start whitespace-no-wrap text-purple-100 font-medium mt-3 leading-5">
-        <div class="flex items-center mx-3 sm:mx-4 xl:ml-0 xl:mr-8 mt-3">
-          <div class="mr-2"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" class="text-purple-400"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"></path></svg>
-          </div>
-          <div>23<!-- --> Kota/Provinsi</div>
-        </div>
-        <div class="flex items-center mx-3 sm:mx-4 xl:ml-0 xl:mr-8 mt-3">
-            <div class="mr-2"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" class="text-purple-400"><path fill-rule="evenodd" d="M10 2a1 1 0 011 1v1.323l3.954 1.582 1.599-.8a1 1 0 01.894 1.79l-1.233.616 1.738 5.42a1 1 0 01-.285 1.05A3.989 3.989 0 0115 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.715-5.349L11 6.477V16h2a1 1 0 110 2H7a1 1 0 110-2h2V6.477L6.237 7.582l1.715 5.349a1 1 0 01-.285 1.05A3.989 3.989 0 015 15a3.989 3.989 0 01-2.667-1.019 1 1 0 01-.285-1.05l1.738-5.42-1.233-.617a1 1 0 01.894-1.788l1.599.799L9 4.323V3a1 1 0 011-1zm-5 8.274l-.818 2.552c.25.112.526.174.818.174.292 0 .569-.062.818-.174L5 10.274zm10 0l-.818 2.552c.25.112.526.174.818.174.292 0 .569-.062.818-.174L15 10.274z" clip-rule="evenodd"></path></svg>
+          <div class="flex items-center mx-3 sm:mx-4 xl:ml-0 xl:mr-8 mt-3">
+            <div class="mr-2"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" class="text-purple-400"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"></path></svg>
             </div>
-            <div>MIT Licensed</div>
-        </div>
-        <div class="flex items-center mx-3 sm:mx-4 xl:mx-0 mt-3">
-          <div class="mr-2"><svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" class="text-purple-400"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            <div>23<!-- --> Kota/Provinsi</div>
           </div>
-          <div>Vue Js + SpringBoot</div>
-        </div>
-        </div>
+      </div>
       </div>
      <div>
        <div class="flex flex-col space-y-3 md:space-y-0 md:flex-row md:space-x-3 lg:space-x-10 p-4 text-white">
@@ -115,7 +80,7 @@
  </section>
  
  <!-- Shuttle -->
- <section class="grid h-full border-b md:grid-cols-2 sm:px-6 lg:px-16">
+ <section class="grid nv-transition h-full border-b md:grid-cols-2 sm:px-6 lg:px-16">
    <div class="border-b md:border-r md:border-b-0 p-4 md:px-8">
      <header class="col-start-1 my-3 row-start-1 flex flex-wrap items-baseline">
        <h2 class="flex-none text-lg leading-6 font-medium text-gray-900 mr-3">Asal</h2>
@@ -152,17 +117,7 @@
  </section>
 
  <!-- Footer -->
- <footer class="flex flex-col md:flex-row items-center justify-between py-5 bg-gray-50 px-4 sm:px-6 lg:px-16">
-   <div class="md:inline-flex items-center md:space-x-3 text-sm">
-      <div class="inline-flex items-center space-x-2">
-        <img class="h-8 w-8 rounded-full border" src="https://avatars.githubusercontent.com/u/77217289?s=64&v=4" alt="safrizal">
-        <p>Backend by <a class="text-indigo-400 hover:text-opacity-70 font-semibold" href="https://github.com/safrizal997" target="_blank">@Safrizal</a></p>
-      </div>
-      <div class="inline-flex items-center space-x-2">
-        <img class="h-8 w-8 rounded-full border" src="https://avatars.githubusercontent.com/u/51039205?s=60&v=4" alt="ekosutrisno">
-        <p>Frontend by <a class="text-indigo-400 hover:text-opacity-70 font-semibold" href="https://github.com/ekosutrisno" target="_blank">@EkoSutrisno</a></p>
-      </div>
-   </div>
+ <footer class="flex  items-center justify-center py-5 bg-gray-50 px-4 sm:px-6 lg:px-16">
    <div class="text-indigo-400 font-semibold text-xs">&copy; ExoApp Corporation {{new Date().getFullYear()}} v0.0.1</div>
  </footer>
 </template>
@@ -172,41 +127,12 @@ import { computed, defineComponent, reactive, toRefs } from "vue";
 import { useStore } from "vuex";
 import { JamKeberangkatan, Shutlle } from "../@types/interface";
 import ShuttleCard from "../components/ShuttleCard.vue";
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-interface IMenuItem{
-   title?: string,
-   to?: string
-}
-
-const profile: IMenuItem[] = [
-    {
-      title: 'Your Profile',
-      to: '#'
-    }, 
-    {
-      title: 'History',
-      to: '/u/histories'
-    },
-    {
-      title: 'Settings',
-      to: '#'
-    },
-    {
-      title: 'Sign out',
-      to: '#'
-    },
-  ]
+import Header from "../components/Header.vue";
 
 export default defineComponent({
   components: {
-    ShuttleCard, 
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems, 
+    ShuttleCard,
+    Header, 
   },
   setup() {
     const store = useStore();
@@ -218,7 +144,6 @@ export default defineComponent({
       shuttleAsal: computed(()=> store.state.shuttleModule.shuttleAsal),
       shuttleTujuan: computed(()=> store.state.shuttleModule.shuttleTujuan),
       user: computed(()=>store.state.userModule.user),
-      profiles: profile
     });
 
     const filteredShuttle = computed(() => {

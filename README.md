@@ -1,27 +1,41 @@
-# Vue 3 + Typescript + Vite
+## <img alt="vue" src="https://avatars.githubusercontent.com/u/51039205?s=460&u=cb1d242b6a9b13a3b6383e46b5410fafe471b63d&v=4" width="20" height="20" /> TravelApp
 
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+[![ExoApps](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://exoappsv2.netlify.app/) [![Netlify Status](https://api.netlify.com/api/v1/badges/85cc322b-1eaf-40d2-88fa-a08de1b349bd/deploy-status)](https://app.netlify.com/sites/nifty-pare-1c0d74/deploys)[![Open in Visual Studio Code](https://open.vscode.dev/badges/open-in-vscode.svg)](https://open.vscode.dev/organization/repository)
 
-## Recommended IDE Setup
+### About
 
-[VSCode](https://code.visualstudio.com/) + [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur). Make sure to enable `vetur.experimental.templateInterpolationService` in settings!
+- Intoductions
+  - It is a Web App portfolio.
+  - BE API From Safrizal [Here](https://ancient-ravine-45699.herokuapp.com/swagger-ui.html)
+- Tech Stack
+  - <img src="https://img.icons8.com/fluent/48/000000/visual-studio-code-2019.png" width="14" height="14"/> Vs Code
+  - <img alt="vue" src="https://v3.vuejs.org/logo.png" width="11" height="11" /> Vue v3.0.0 + Vite Typescript
+  - <img alt="firebase" src="https://tailwindcss.com/_next/static/media/tailwindcss-mark.cb8046c163f77190406dfbf4dec89848.svg" width="14" height="14" /> TailwindCss v2.2.0
+- Author
+  - Eko Sutrisno & Safrizal
+  - [Github](https://github.com/ekosutrisno) Or [Gitlab](https://gitlab.com/ekosutrisno1)
+  - Website [ExoMTodo](https://ekosutrisno.netlify.app)
 
-### If Using `<script setup>`
+### <img alt="vue" src="https://v3.vuejs.org/logo.png" width="15" height="15" /> Vue Project Setup
 
-[`<script setup>`](https://github.com/vuejs/rfcs/pull/227) is a feature that is currently in RFC stage. To get proper IDE support for the syntax, use [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) instead of Vetur (and disable Vetur).
+```shell
+npm install
+```
 
-## Type Support For `.vue` Imports in TS
+- ##### Development
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can use the following:
+```shell
+npm run dev
+```
 
-### If Using Volar
+- ##### Compiles Production
 
-Run `Volar: Switch TS Plugin on/off` from VSCode command palette.
+```shell
+npm run build
+```
 
-### If Using Vetur
+- ##### Preview
 
-1. Install and add `@vuedx/typescript-plugin-vue` to the [plugins section](https://www.typescriptlang.org/tsconfig#plugins) in `tsconfig.json`
-2. Delete `src/shims-vue.d.ts` as it is no longer needed to provide module info to Typescript
-3. Open `src/main.ts` in VSCode
-4. Open the VSCode command palette
-5. Search and run "Select TypeScript version" -> "Use workspace version"
+```shell
+npm run serve
+```

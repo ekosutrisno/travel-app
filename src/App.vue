@@ -1,11 +1,11 @@
 <template>
-  <div class="bg-white min-h-screen nv-transition font-quicksand">
-    <router-view></router-view>
+  <div class="bg-white min-h-screen font-quicksand">
+    <router-view/>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, reactive } from "vue";
+import { defineComponent, onMounted, reactive } from "vue";
 import { useStore } from "vuex";
 
 export default defineComponent({

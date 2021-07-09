@@ -6,7 +6,8 @@ import apiService from '../../config/axiosConfig';
 
 export interface StoreUser {
    users: User[],
-   user: any
+   user: any,
+   photoUrl?: string 
 }
 
 const userModule: Module<StoreUser, State> = {
@@ -14,7 +15,8 @@ const userModule: Module<StoreUser, State> = {
    state() {
       return {
          users: [],
-         user: {}
+         user: {},
+         photoUrl: 'https://res.cloudinary.com/ekosutrisno/image/upload/v1625803063/avatars/MyAvatar_taylrm.png'
       }
    },
    mutations: {
@@ -32,6 +34,12 @@ const userModule: Module<StoreUser, State> = {
                commit('SET_USER', userFiltered.length ? userFiltered[0] : null);
             })
             .catch(e => console.log(e));
+      },
+      updateUser({dispatch}, payload: any){
+         apiService.put(`/user/${payload.userId}`, payload.userData)
+         .then(() =>{
+            dispatch('setUserData');
+         })
       }
    }
 }

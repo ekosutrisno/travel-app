@@ -1,33 +1,8 @@
 <template>
 <header class="bg-gradient-to-r from-purple-700 to-basePurple h-80 px-4 sm:px-6 lg:px-16">
-   <div class="flex border-b border-indigo-700 border-opacity-50 items-center justify-between py-5 text-white">
-     <div class="text-2xl font-semibold inline-flex items-center space-x-2">
-       <span>
-         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-         </svg>
-       </span>
-       <span>Checkout</span>
-     </div>
-     <Menu as="div" class="ml-3 relative z-40">
-        <div>
-          <MenuButton class="max-w-xs rounded-full cursor-default md:cursor-pointer flex items-center text-sm focus:outline-none">
-            <span class="sr-only">Open user menu</span>
-            <p class="mr-2"> {{ user ? user.nama : 'Consument'}} </p> 
-            <img class="h-10 w-10 rounded-full border-2" src="https://cdn.dribbble.com/users/4113503/avatars/normal/8a6dc47aa73ff9ebd39c20141d4c9d86.png?1589054783" alt="profile">
-          </MenuButton>
-        </div>
-        <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-          <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <MenuItem v-for="item in profiles" :key="item.title" v-slot="{ active }">
-              <router-link :to="item.to" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.title }}</router-link>
-            </MenuItem>
-          </MenuItems>
-        </transition>
-      </Menu>
-   </div>
+   <Header :title="'Checkout'"/>
 </header>
-   <section class="-mt-56 relative h-full px-4 pb-5 flex items-center justify-center">
+   <section class="-mt-56 nv-transition relative h-full px-4 pb-5 flex items-center justify-center">
       <div class="relative w-full bg-white max-w-xl mx-auto border rounded-md">
          
          <div class="p-4 md:px-8">
@@ -67,7 +42,7 @@
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
                            </svg>
                         </span>
-                        <span> Rp35000 </span>
+                        <span> Rp350000 </span>
                      </div>
                   </div>
                </div>
@@ -110,40 +85,11 @@ import { computed, defineComponent, reactive, toRefs } from 'vue'
 import { useRouter } from 'vue-router';
 import { useStore } from 'vuex'
 import { converTanggal } from '../config/utills';
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-interface IMenuItem{
-   title?: string,
-   to?: string
-}
-
-const profile: IMenuItem[] = [
-    {
-      title: 'Your Profile',
-      to: '#'
-    }, 
-    {
-      title: 'History',
-      to: '/u/histories'
-    },
-    {
-      title: 'Settings',
-      to: '#'
-    },
-    {
-      title: 'Sign out',
-      to: '#'
-    },
-  ]
+import Header from '../components/Header.vue';
 
 export default defineComponent({
    components:{
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
+    Header,
    },
    setup () {
       const store = useStore();
@@ -154,7 +100,6 @@ export default defineComponent({
          shuttleTujuan: computed(()=> store.state.shuttleModule.shuttleTujuan),
          jam: computed(()=> store.state.shuttleModule.jam),
          user: computed(()=>store.state.userModule.user),
-         profiles: profile,
          tanggalKeberangkatan: '',
          nomorTelephone: '',
          nomorKursi: '',

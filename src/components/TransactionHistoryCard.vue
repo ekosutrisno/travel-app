@@ -50,7 +50,7 @@
       <div class="flex flex-col border-b w-full space-y-2 p-2">
          <div class="text-sm inline-flex justify-between w-full">
             <p class="text-xs text-gray-400">Harga Tiket</p>
-            <p> Rp{{trx.harga ? trx.harga.harga : 35000}}</p>
+            <p> Rp{{trx.harga ? trx.harga.harga : 350000}}</p>
          </div>
          <div class="text-sm inline-flex justify-between w-full">
             <p class="text-xs text-gray-400">Biaya Admin</p>

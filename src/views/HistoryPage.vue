@@ -1,33 +1,8 @@
 <template>
 <header class="bg-gradient-to-r from-purple-700 to-basePurple h-80 px-4 sm:px-6 lg:px-16">
-   <div class="flex border-b border-indigo-700 border-opacity-50 items-center justify-between py-5 text-white">
-     <div class="text-2xl font-semibold inline-flex items-center space-x-2">
-       <span>
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-indigo-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
-        </svg>
-       </span>
-       <span>History</span>
-     </div>
-     <Menu as="div" class="ml-3 relative z-40">
-        <div>
-          <MenuButton class="max-w-xs rounded-full cursor-default md:cursor-pointer flex items-center text-sm focus:outline-none">
-            <span class="sr-only">Open user menu</span>
-            <p class="mr-2"> {{ user ? user.nama : 'Consument'}} </p> 
-            <img class="h-10 w-10 rounded-full border-2" src="https://cdn.dribbble.com/users/4113503/avatars/normal/8a6dc47aa73ff9ebd39c20141d4c9d86.png?1589054783" alt="profile">
-          </MenuButton>
-        </div>
-        <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
-          <MenuItems class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
-            <MenuItem v-for="item in profiles" :key="item.title" v-slot="{ active }">
-              <router-link :to="item.to" :class="[active ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700']">{{ item.title }}</router-link>
-            </MenuItem>
-          </MenuItems>
-        </transition>
-      </Menu>
-   </div>
+   <Header :title="'History'"/>
 </header>
- <section class="grid relative -mt-56 h-full sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 pb-5 sm:px-6 lg:px-16">
+ <section class="grid nv-transition relative -mt-56 h-full sm:grid-cols-2 md:grid-cols-3 gap-4 px-4 pb-5 sm:px-6 lg:px-16">
      <TransactionHistoryCard 
         v-for="(trx, idx) in transactions"
         :key="trx.transaksiId"
@@ -39,52 +14,20 @@
 
 <script lang="ts">
 import { computed, defineComponent, onMounted, reactive, toRefs } from 'vue'
-import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import { useStore } from 'vuex'
 import TransactionHistoryCard from '../components/TransactionHistoryCard.vue'
-
-interface IMenuItem{
-   title?: string,
-   to?: string
-}
-
-const profile: IMenuItem[] = [
-    {
-      title: 'Your Profile',
-      to: '#'
-    }, 
-    {
-      title: 'History',
-      to: '/u/histories'
-    },
-    {
-      title: 'Settings',
-      to: '#'
-    },
-    {
-      title: 'Sign out',
-      to: '#'
-    },
-  ]
-
+import Header from '../components/Header.vue'
 export default defineComponent({
   components: {
-    Disclosure,
-    DisclosureButton,
-    DisclosurePanel,
-    Menu,
-    MenuButton,
-    MenuItem,
-    MenuItems,
-    TransactionHistoryCard
+    TransactionHistoryCard,
+    Header
   },
   setup () {
       
     const store = useStore();
     const state = reactive({
         user: computed(()=>store.state.userModule.user),
-        transactions: computed(()=> store.state.transactionModule.transactions),
-        profiles: profile
+        transactions: computed(()=> store.state.transactionModule.transactions)
     })
 
     onMounted(()=>{
