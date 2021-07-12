@@ -19,7 +19,7 @@
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                            </svg>
                         </span>
-                        <span> {{shuttleAsal ? shuttleAsal.namaShuttle : 'Pilih Shuttle Asal'}} </span>
+                        <span> {{shuttleAsal ? shuttleAsal.namaShuttle : 'Shuttle Asal'}} </span>
                      </div>
                   </div>
                    <div class="inline-block items-center space-y-1">
@@ -31,7 +31,7 @@
                               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                            </svg>
                         </span>
-                        <span> {{shuttleTujuan ? shuttleTujuan.namaShuttle : 'Pilih Shuttle Tujuan'}} </span>
+                        <span> {{shuttleTujuan ? shuttleTujuan.namaShuttle : 'Shuttle Tujuan'}} </span>
                      </div>
                   </div>
                    <div class="inline-block items-center space-y-1">
@@ -43,6 +43,17 @@
                            </svg>
                         </span>
                         <span> Rp350000 </span>
+                     </div>
+                  </div>
+                   <div class="inline-block items-center space-y-1">
+                     <p class="text-xs">Keberangkatan</p>
+                     <div class="p-1.5 sm:p-2.5 text-sm text-gray-500 font-semibold md:cursor-pointer rounded-md inline-flex items-center space-x-1 bg-white sm:border border-opacity-50 hover:bg-basePurple hover:text-white">
+                        <span>
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
+                           </svg>
+                        </span>
+                        <span> {{jam.jam}} </span>
                      </div>
                   </div>
                </div>

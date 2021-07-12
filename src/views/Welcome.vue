@@ -9,7 +9,7 @@
       <Travel class="w-full"/>
    </div>
    <div class="mx-auto max-w-xs z-10">
-      <router-link to="/u/shuttle" class="py-3 px-6 w-max cursor-default sm:cursor-pointer inline-flex items-center justify-center mx-auto font-semibold rounded-md bg-white text-basePurple">
+      <router-link to="/u/shuttle" class="py-3 px-6 text-sm text-gray-500 font-semibold md:cursor-pointer rounded inline-flex items-center space-x-1 bg-white sm:border border-opacity-50 hover:bg-basePurple hover:text-white">
          <div class="inline-flex items-center space-x-2">
             <span>Get Started</span>
          </div>

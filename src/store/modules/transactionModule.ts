@@ -1,8 +1,11 @@
 import { AxiosResponse } from "axios";
+import { useToast } from "vue-toastification";
 import { Module } from "vuex";
 import { State } from "..";
 import { Transaction } from "../../@types/interface";
 import apiService from '../../config/axiosConfig';
+
+const toast = useToast();
 
 interface StoreTransaction {
    transactions: Transaction[]
@@ -33,7 +36,10 @@ const transactionModule: Module<StoreTransaction, State> = {
       async checkoutAction({ dispatch }, payload: any): Promise<void> {
          await apiService.post(`/transaction`, payload)
             .then(() => {
-               dispatch('setTransaction', payload.userId);
+               dispatch('setTransaction', payload.userId)
+               .then(()=>{
+                  toast.info('Transaction Success.')
+               });
             });
       }
    }

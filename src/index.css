@@ -9,10 +9,16 @@
     backdrop-filter: blur(12px);
     background-color: hsla(0, 0%, 100%, 0.75);
   }
-  @responsive{
+
+  .toast-style {
+    @apply bg-basePurple;
+    @apply border border-purple-300 shadow-xl;
+  }
+
+  @responsive {
     .rounded-custom-b {
-      border-bottom-right-radius: 2.5rem/* 16px */;
-      border-bottom-left-radius: 2.5rem/* 16px */;
+      border-bottom-right-radius: 2.5rem /* 16px */;
+      border-bottom-left-radius: 2.5rem /* 16px */;
     }
   }
 }

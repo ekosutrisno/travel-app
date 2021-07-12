@@ -1,4 +1,5 @@
 import { AxiosResponse } from "axios";
+import { useToast } from "vue-toastification";
 import { Module } from "vuex";
 import { State } from "..";
 import { User } from "../../@types/interface";
@@ -9,6 +10,8 @@ export interface StoreUser {
    user: any,
    photoUrl?: string 
 }
+
+const toast = useToast();
 
 const userModule: Module<StoreUser, State> = {
    namespaced: true,
@@ -38,7 +41,10 @@ const userModule: Module<StoreUser, State> = {
       updateUser({dispatch}, payload: any){
          apiService.put(`/user/${payload.userId}`, payload.userData)
          .then(() =>{
-            dispatch('setUserData');
+            dispatch('setUserData').then(()=>{
+               toast.info("Profile Updated.")
+            });
+
          })
       }
    }
